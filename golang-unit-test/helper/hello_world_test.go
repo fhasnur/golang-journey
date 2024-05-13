@@ -10,7 +10,7 @@ func TestHelloWorldFandi(t *testing.T) {
 
 	if result != "Hello Fandi" {
 		// error
-		t.Fail()
+		t.Error("Result must be 'Hello Fandi'")
 	}
 
 	fmt.Println("TestHelloWorldFandi Done")
@@ -21,7 +21,7 @@ func TestHelloWorldHasnur(t *testing.T) {
 
 	if result != "Hello Hasnur" {
 		// error
-		t.FailNow()
+		t.Fatal("Result must be 'Hello Hasnur'")
 	}
 
 	fmt.Println("TestHelloWorldHasnur Done")
