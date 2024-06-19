@@ -28,3 +28,22 @@ func TestQueryParameter(t *testing.T) {
 
 	fmt.Println(string(body))
 }
+
+func MultipleQueryParameter(writer http.ResponseWriter, request *http.Request) {
+	firstName := request.URL.Query().Get("first_name")
+	lastName := request.URL.Query().Get("last_name")
+
+	fmt.Fprintf(writer, "Hello %s %s", firstName, lastName)
+}
+
+func TestMultipleQueryParameter(t *testing.T) {
+	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080/hello?first_name=Fandi&last_name=Hasnur", nil)
+	reconder := httptest.NewRecorder()
+
+	MultipleQueryParameter(reconder, request)
+
+	response := reconder.Result()
+	body, _ := io.ReadAll(response.Body)
+
+	fmt.Println(string(body))
+}
