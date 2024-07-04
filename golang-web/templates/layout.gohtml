@@ -1,3 +1,5 @@
-{{template "header.gohtml" .}}
+{{define "layout"}}
+{{template "header" .}}
   <h1>Hello {{.Name}}</h1>
-{{template "footer.gohtml"}}
+{{template "footer"}}
+{{end}}
