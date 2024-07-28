@@ -9,3 +9,4 @@
 - [Golang Web](https://github.com/fhasnur/learn-golang/tree/main/golang-web)
 - [Golang HttpRouter](https://github.com/fhasnur/golang-journey/tree/main/golang-httprouter)
 - [Golang JSON](https://github.com/fhasnur/golang-journey/tree/main/golang-json)
+- [Golang RESTful API](https://github.com/fhasnur/golang-journey/tree/main/golang-restful-api)
