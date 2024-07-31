@@ -13,6 +13,11 @@
   "paths": {
     "/categories": {
       "get": {
+        "security": [
+          {
+            "CategoryAuth": []
+          }
+        ],
         "tags": [
           "Category API"
         ],
@@ -46,6 +51,11 @@
         }
       },
       "post": {
+        "security": [
+          {
+            "CategoryAuth": []
+          }
+        ],
         "tags": [
           "Category API"
         ],
@@ -87,6 +97,11 @@
     },
     "/categories/{categoryId}": {
       "get": {
+        "security": [
+          {
+            "CategoryAuth": []
+          }
+        ],
         "tags": [
           "Category API"
         ],
@@ -124,6 +139,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+            "CategoryAuth": []
+          }
+        ],
         "tags": [
           "Category API"
         ],
@@ -170,6 +190,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "CategoryAuth": []
+          }
+        ],
         "tags": [
           "Category API"
         ],
@@ -206,6 +231,14 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "CategoryAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Authentication for Category API"
+      }
+    },
     "schemas": {
       "CreateOrUpdateCategory": {
         "type": "object",
