@@ -168,6 +168,40 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Category API"
+        ],
+        "summary": "Delete category by Id",
+        "description": "Delete category by Id",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "Category Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
