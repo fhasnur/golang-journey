@@ -327,3 +327,26 @@ func TestListCategoriesSuccess(t *testing.T) {
 	assert.Equal(t, category2.Id, int(categoryResponse2["id"].(float64)))
 	assert.Equal(t, category2.Name, categoryResponse2["name"])
 }
+
+func TestUnauthorized(t *testing.T) {
+	db := setupTestDB()
+	truncateCategory(db)
+	router := setupRouter(db)
+
+	request := httptest.NewRequest(http.MethodDelete, "http://localhost:3000/api/categories", nil)
+	request.Header.Add("X-API-KEY", "SALAH")
+
+	recorder := httptest.NewRecorder()
+
+	router.ServeHTTP(recorder, request)
+
+	response := recorder.Result()
+	assert.Equal(t, 401, response.StatusCode)
+
+	body, _ := io.ReadAll(response.Body)
+	var responseBody map[string]interface{}
+	json.Unmarshal(body, &responseBody)
+
+	assert.Equal(t, 401, int(responseBody["code"].(float64)))
+	assert.Equal(t, "UNAUTHORIZED", responseBody["status"])
+}
