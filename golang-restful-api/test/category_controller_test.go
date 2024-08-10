@@ -282,3 +282,48 @@ func TestDeleteCategoryFailed(t *testing.T) {
 	assert.Equal(t, 404, int(responseBody["code"].(float64)))
 	assert.Equal(t, "NOT FOUND", responseBody["status"])
 }
+
+func TestListCategoriesSuccess(t *testing.T) {
+	db := setupTestDB()
+	truncateCategory(db)
+
+	tx, _ := db.Begin()
+	categoryRepository := repository.NewCategoryRepository()
+	category1 := categoryRepository.Save(context.Background(), tx, domain.Category{
+		Name: "Gadget",
+	})
+	category2 := categoryRepository.Save(context.Background(), tx, domain.Category{
+		Name: "Computer",
+	})
+	tx.Commit()
+
+	router := setupRouter(db)
+
+	request := httptest.NewRequest(http.MethodGet, "http://localhost:3000/api/categories", nil)
+	request.Header.Add("X-API-KEY", "RAHASIA")
+
+	recorder := httptest.NewRecorder()
+
+	router.ServeHTTP(recorder, request)
+
+	response := recorder.Result()
+	assert.Equal(t, 200, response.StatusCode)
+
+	body, _ := io.ReadAll(response.Body)
+	var responseBody map[string]interface{}
+	json.Unmarshal(body, &responseBody)
+
+	assert.Equal(t, 200, int(responseBody["code"].(float64)))
+	assert.Equal(t, "OK", responseBody["status"])
+
+	var categories = responseBody["data"].([]interface{})
+
+	categoryResponse1 := categories[0].(map[string]interface{})
+	categoryResponse2 := categories[1].(map[string]interface{})
+
+	assert.Equal(t, category1.Id, int(categoryResponse1["id"].(float64)))
+	assert.Equal(t, category1.Name, categoryResponse1["name"])
+
+	assert.Equal(t, category2.Id, int(categoryResponse2["id"].(float64)))
+	assert.Equal(t, category2.Name, categoryResponse2["name"])
+}
