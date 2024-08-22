@@ -13,3 +13,4 @@
 | Golang HttpRouter            | [Using HttpRouter for routing](https://github.com/fhasnur/golang-journey/tree/main/golang-httprouter) |
 | Golang JSON                  | [Handling JSON in Go](https://github.com/fhasnur/golang-journey/tree/main/golang-json) |
 | Golang RESTful API           | [Creating RESTful APIs in Go](https://github.com/fhasnur/golang-journey/tree/main/golang-restful-api) |
+| Golang Dependency Injection  | [Implementing Dependency Injection in Go](https://github.com/fhasnur/golang-journey/tree/main/golang-dependency-injection) |
