@@ -1,0 +1,12 @@
+CREATE TABLE correct (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE TABLE wrong (
+    id INT NOT NULL AUTO_INCREMENT,
+    -- name VARCHIR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
