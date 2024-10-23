@@ -19,4 +19,12 @@ func NewDB() *sql.DB {
 
 	// migrate -database "mysql://root:123456789@tcp(localhost:3306)/golang_database_migration" -path db/migrations up
 	// migrate -database "mysql://root:123456789@tcp(localhost:3306)/golang_database_migration" -path db/migrations down
+
+	// migrate create -ext sql -dir db/migrations create_table_first
+	// migrate create -ext sql -dir db/migrations create_table_second
+	// migrate create -ext sql -dir db/migrations create_table_third
+
+	// Migration to a spesific version
+	// migrate -database "mysql://root:123456789@tcp(localhost:3306)/golang_database_migration" -path db/migrations up [number] (example: 1, 2, 3,..)
+	// migrate -database "mysql://root:123456789@tcp(localhost:3306)/golang_database_migration" -path db/migrations down [number] (example: 1, 2, 3,..)
 }
