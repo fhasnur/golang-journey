@@ -94,3 +94,23 @@ func TestValidationErrors(t *testing.T) {
 		}
 	}
 }
+
+func TestStructCrossField(t *testing.T) {
+	type RegisterUser struct {
+		Username        string `validate:"required,email"`
+		Password        string `validate:"required,min=5"`
+		ConfirmPassword string `validate:"required,min=5,eqfield=Password"`
+	}
+
+	validate := validator.New()
+	request := RegisterUser{
+		Username:        "fandi@example.com",
+		Password:        "fandi123",
+		ConfirmPassword: "fandi123",
+	}
+
+	err := validate.Struct(request)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
