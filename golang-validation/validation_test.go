@@ -73,3 +73,24 @@ func TestStruct(t *testing.T) {
 		fmt.Println(err.Error())
 	}
 }
+
+func TestValidationErrors(t *testing.T) {
+	type LoginRequest struct {
+		Username string `validate:"required,email"`
+		Password string `validate:"required,min=5"`
+	}
+
+	validate := validator.New()
+	loginRequest := LoginRequest{
+		Username: "fandi",
+		Password: "123",
+	}
+
+	err := validate.Struct(loginRequest)
+	if err != nil {
+		validationErrors := err.(validator.ValidationErrors)
+		for _, fieldError := range validationErrors {
+			fmt.Println("error", fieldError.Field(), "on tag", fieldError.Tag(), "with error", fieldError.Error())
+		}
+	}
+}
