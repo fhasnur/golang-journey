@@ -216,3 +216,59 @@ func TestBasicCollection(t *testing.T) {
 		fmt.Println(err.Error())
 	}
 }
+
+func TestMap(t *testing.T) {
+	type Address struct {
+		City    string `validate:"required"`
+		Country string `validate:"required"`
+	}
+
+	type School struct {
+		Name string `validate:"required"`
+	}
+
+	type User struct {
+		Id        string            `validate:"required"`
+		Name      string            `validate:"required"`
+		Addresses []Address         `validate:"required,dive"`
+		Hobbies   []string          `validate:"required,dive,required,min=3"`
+		Schools   map[string]School `validate:"dive,keys,required,min=2,endkeys,dive"`
+	}
+
+	validate := validator.New()
+	request := User{
+		Id:   "1",
+		Name: "Fandi",
+		Addresses: []Address{
+			{
+				City:    "Baubau",
+				Country: "Indonesia",
+			},
+			{
+				City:    "Jakarta",
+				Country: "Indonesia",
+			},
+		},
+		Hobbies: []string{
+			"Parkour",
+			"Coding",
+			"Design",
+		},
+		Schools: map[string]School{
+			"SD": {
+				Name: "SDN 1 Bone-bone",
+			},
+			"SMP": {
+				Name: "SMPN 4 Baubau",
+			},
+			"SMA": {
+				Name: "SMAN 2 Baubau",
+			},
+		},
+	}
+
+	err := validate.Struct(request)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
