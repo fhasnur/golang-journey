@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
@@ -86,4 +87,22 @@ func TestRouteParameter(t *testing.T) {
 	bytes, err := io.ReadAll(response.Body)
 	assert.Nil(t, err)
 	assert.Equal(t, "Get order 10 from user fandi", string(bytes))
+}
+
+func TestFormRequest(t *testing.T) {
+	app.Post("/hello", func(ctx *fiber.Ctx) error {
+		name := ctx.FormValue("name")
+		return ctx.SendString("Hello " + name)
+	})
+
+	body := strings.NewReader("name=Fandi")
+	request := httptest.NewRequest("POST", "/hello", body)
+	request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	response, err := app.Test(request)
+	assert.Nil(t, err)
+	assert.Equal(t, 200, response.StatusCode)
+
+	bytes, err := io.ReadAll(response.Body)
+	assert.Nil(t, err)
+	assert.Equal(t, "Hello Fandi", string(bytes))
 }
