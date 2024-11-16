@@ -17,3 +17,5 @@
 | Golang Logging               | [Implementing logging in Go applications](https://github.com/fhasnur/golang-journey/tree/main/golang-logging) |
 | Golang Generics              | [Using generics for type-safe code](https://github.com/fhasnur/golang-journey/tree/main/golang-generics) |
 | Golang Database Migration    | [Handling database migrations in Go](https://github.com/fhasnur/learn-golang/tree/main/golang-database-migration) |
+| Golang Validation            | [Data validation in Go](https://github.com/fhasnur/golang-journey/tree/main/golang-validation) |
+| Golang Viper                 | [Configuration management with Viper](https://github.com/fhasnur/golang-journey/tree/main/golang-viper) |
