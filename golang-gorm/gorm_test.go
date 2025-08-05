@@ -358,5 +358,4 @@ func TestAutoIncrement(t *testing.T) {
 		assert.NotEqual(t, 0, len(userLog.ID))
 		fmt.Println(userLog.ID)
 	}
-
 }
