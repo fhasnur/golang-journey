@@ -9,6 +9,7 @@ type User struct {
 	CreatedAt   time.Time `gorm:"column:created_at;autoCreateTime;<-:create"`
 	UpdatedAt   time.Time `gorm:"column:updated_at;autoCreateTime;autoUpdateTime"`
 	Information string    `gorm:"-"`
+	Wallet      Wallet    `gorm:"foreignKey:user_id;references:id"`
 }
 
 // Jika ingin mengubah nama tabel mapping-nya
