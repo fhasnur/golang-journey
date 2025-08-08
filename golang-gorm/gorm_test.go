@@ -586,3 +586,15 @@ func TestBelongsTo(t *testing.T) {
 	err = db.Model(&Address{}).Joins("User").Find(&addresses).Error
 	assert.Nil(t, err)
 }
+
+func TestBelongsToWallet(t *testing.T) {
+	fmt.Println("Preload")
+	var wallets []Wallet
+	err := db.Model(&Wallet{}).Preload("User").Find(&wallets).Error
+	assert.Nil(t, err)
+
+	fmt.Println("Joins")
+	wallets = []Wallet{}
+	err = db.Model(&Wallet{}).Joins("User").Find(&wallets).Error
+	assert.Nil(t, err)
+}
