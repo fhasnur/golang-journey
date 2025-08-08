@@ -574,3 +574,15 @@ func TestTakePreloadJoinOneToMany(t *testing.T) {
 		Take(&user, "users.id = ?", "50").Error
 	assert.Nil(t, err)
 }
+
+func TestBelongsTo(t *testing.T) {
+	fmt.Println("Preload")
+	var addresses []Address
+	err := db.Model(&Address{}).Preload("User").Find(&addresses).Error
+	assert.Nil(t, err)
+
+	fmt.Println("Joins")
+	addresses = []Address{}
+	err = db.Model(&Address{}).Joins("User").Find(&addresses).Error
+	assert.Nil(t, err)
+}
