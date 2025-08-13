@@ -821,3 +821,8 @@ func TestScopes(t *testing.T) {
 	err = db.Scopes(SultanWalletBalance).Find(&wallets).Error
 	assert.Nil(t, err)
 }
+
+func TestMigrator(t *testing.T) {
+	err := db.Migrator().AutoMigrate(&GuestBook{})
+	assert.Nil(t, err)
+}
