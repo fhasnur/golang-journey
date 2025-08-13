@@ -1,6 +1,10 @@
 package golanggorm
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
 	ID           string    `gorm:"primary_key;column:id;<-:create"`
@@ -17,6 +21,14 @@ type User struct {
 // Jika ingin mengubah nama tabel mapping-nya
 func (u *User) TableName() string {
 	return "users"
+}
+
+func (u *User) BeforeCreate(db *gorm.DB) error {
+	if u.ID == "" {
+		u.ID = "user-" + time.Now().Format("20060102150405")
+	}
+
+	return nil
 }
 
 type Name struct {
